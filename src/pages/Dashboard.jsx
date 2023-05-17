@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import data from '../sampleData';
-
-const studentName = 'Mia';
+import notes from '../data/notesData';
+import courses from '../data/coursesData';
+import user from '../data/userData';
 
 const today = new Date();
 const curHr = today.getHours();
@@ -18,78 +18,43 @@ if (curHr < 12) {
 const Dashboard = () => {
 	return (
 		<div className='container'>
-			<p className='welcome-message'>
-				{time}, {studentName}!
-			</p>
+			<>
+				{user.map((user) => (
+					<p className='welcome-message'>
+						{time} {user.firstname}!
+					</p>
+				))}
+			</>
 			<div className='card-grid'>
 				<div className='card card-1'>
-					<h3>Active Programs</h3>
+					<h3>Active Courses</h3>
 
-					<div className='active-item'>
-						<img
-							src='./images/homepage/brookstone.svg'
-							alt='Brookstone Uni Crest'
-						/>
-						<div className='uni-name-wrap'>
-							<p className='pill-text'>Master of Computer Science</p>
-							<p>University of Upstate at Brookstone</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>1</p>
-							<p>Overdue Assignments</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>5</p>
-							<p>Remaining Absenses</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>A</p>
-							<p>Academic Average</p>
-						</div>
-					</div>
-					<div className='active-item'>
-						<img
-							src='./images/homepage/dursburg.svg'
-							alt='Dursburg Uni Crest'
-						/>
-						<div className='uni-name-wrap'>
-							<p className='pill-text'>CERTIFICATE UX/UI design</p>
-							<p>Academy of Art and Technology at Dursburg</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>0</p>
-							<p>Overdue Assignments</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>6</p>
-							<p>Remaining Absenses</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>B</p>
-							<p>Academic Average</p>
-						</div>
-					</div>
-					<div className='active-item'>
-						<img
-							src='./images/homepage/brookstone.svg'
-							alt='Brookstone Uni Crest'
-						/>
-						<div className='uni-name-wrap'>
-							<p className='pill-text'>UK Politics</p>
-							<p>University of Upstate at Brookstone</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>2</p>
-							<p>Overdue Assignments</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>1</p>
-							<p>Remaining Absenses</p>
-						</div>
-						<div className='active-assignments-wrap'>
-							<p className='number'>A</p>
-							<p>Academic Average</p>
-						</div>
+					<div>
+						{courses.map((courses) => (
+							<div className='active-item'>
+								<img
+									src={courses.crest}
+									alt='Brookstone Uni Crest'
+								/>
+								<div className='uni-name-wrap'>
+									<p className='pill-text'>{courses.name}</p>
+									<p>{courses.uni}</p>
+								</div>
+								<div className='active-assignments-wrap'>
+									<p className='number'>{courses.overdue}</p>
+									<p>Overdue Assignments</p>
+								</div>
+								<div className='active-assignments-wrap'>
+									<p className='number'>{courses.absenses}</p>
+									<p>Remaining Absenses</p>
+								</div>
+								<div className='active-assignments-wrap'>
+									<p className='number'>{courses.averageGrade}</p>
+									<p>Academic Average</p>
+								</div>
+							</div>
+						))}
+						;
 					</div>
 				</div>
 
@@ -185,16 +150,16 @@ const Dashboard = () => {
 				<div className='card card-4'>
 					<h3>Student Notes</h3>
 					{/* TODO filter only 3 recent items */}
-					{data.map((data) => (
+					{notes.map((notes) => (
 						<div className='notes-item'>
 							<div className='notes-date'>
-								<p className='notes-day'>{data.day}</p>
-								<p className='notes-title-number'>{data.date}</p>
-								<p className='notes-title-month'>{data.month}</p>
+								<p className='notes-day'>{notes.day}</p>
+								<p className='notes-title-number'>{notes.date}</p>
+								<p className='notes-title-month'>{notes.month}</p>
 							</div>
 							<div className='notes-desc'>
-								<p>{data.title}</p>
-								<p>{data.body}</p>
+								<p>{notes.title}</p>
+								<p>{notes.body}</p>
 							</div>
 							<Link
 								to='./notes'
@@ -210,4 +175,4 @@ const Dashboard = () => {
 	);
 };
 
-export default (Dashboard, studentName);
+export default Dashboard;

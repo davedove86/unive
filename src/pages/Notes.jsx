@@ -1,20 +1,24 @@
-import data from '../sampleData';
-import studentName from './Dashboard';
+import notesData from '../data/notesData';
+import user from '../data/userData';
 
 const Notes = () => {
 	return (
 		<div className='container'>
-			<h1>{studentName}'s Notes</h1>
+			<>
+				{user.map((user) => (
+					<h1>{user.firstname}'s Notes!</h1>
+				))}
+			</>
 			<br />
 			<div className='card-grid'>
-				{data.map((data) => (
+				{notesData.map((notesData) => (
 					<div className='card'>
-						<p className='notes-day'>{data.day}</p>
-						<p className='notes-title-number'>{data.date}</p>
-						<p className='notes-title-month'>{data.month}</p>
+						<p className='notes-day'>{notesData.day}</p>
+						<p className='notes-title-number'>{notesData.date}</p>
+						<p className='notes-title-month'>{notesData.month}</p>
 						<div className='notes-desc'>
-							<p>{data.title}</p>
-							<p>{data.body}</p>
+							<p>{notesData.title}</p>
+							<p>{notesData.body}</p>
 						</div>
 					</div>
 				))}
